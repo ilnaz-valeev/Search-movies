@@ -1,16 +1,15 @@
 // src/App.jsx
 import React from "react";
-import Header from "./components/Header/Header"; 
-import Main from "./components/Main/Main"; 
-import Footer from "./components/Footer/Footer"; 
+import HomePages from "./pages/HomePages"; 
+import MovieDetalisPage from "./pages/MovieDetailsPage"; 
+
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <Header /> 
-      <Main /> 
-      <Footer /> 
+      <HomePages />
+      <MovieDetalisPage />
     </div>
   );
 }
