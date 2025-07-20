@@ -1,112 +1,251 @@
-*{
+// HomePage.scss
+
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
-// header{
 
-// }
-.header__user{
-display: flex;
-justify-content: space-between;
-    .header__greeting{
-        display: flex;
-        justify-content: start;
-        align-items: start;
-        color: #fff;
-        font-size: 30px;
-        margin-top: 60px;
-        margin-left: 33px;
-        font-family: 'Archivo', sans-serif; 
-        font-weight: 100;   
-    }
-    .header__photo{
-        margin-top: 50px;
-        margin-right: 30px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-    }
+// Variables
+$primary-bg-color: #382c3e;
+$secondary-bg-color: #998396;
+$text-color: #ffffff;
+$secondary-text-color: #998396;
+$border-radius: 20px;
+$font-family: 'Archivo', sans-serif;
+$font-weight-light: 100;
+
+// Main 
+.home-page {
+    color: $text-color;
 }
-.header__search{
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
-    .input-search{
-        width: 250px;
-        padding: 23px 0px 23px 58px;
-        border-radius: 18px;
-        background-color: #382c3e;
-        border: none;
-        :focus{
-            border:none;
-            outline: none;
+
+// Header 
+.page-header {
+    .user-profile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__greeting {
+            color: $text-color;
+            font-size: 30px;
+            margin-top: 60px;
+            margin-left: 33px;
+            font-family: $font-family;
+            font-weight: $font-weight-light;
+        }
+
+        &__avatar {
+            margin-top: 50px;
+            margin-right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 25px;
+
+        &__input {
+            width: 310px;
+            padding: 23px 0 23px 58px;
+            border-radius: 18px;
+            background-color: $primary-bg-color;
+            border: none;
+            color: $text-color;
+
+            &:focus {
+                outline: none;
+            }
         }
     }
 }
 
-
-@media (max-width: 375px) {
-
-}
-@media (max-width: 425px) {
-
-}
-@media (max-width: 768px) {
-
-}
-@media (max-width: 1024) {
-
-}
-@media (max-width: 1440px) {
-
-}
-@media (max-width: 2560px) {
-
-}
-
-
-
-
-
-
-
-
-.for-yuo{
+// Recommendation
+.recommendations-section {
     display: flex;
-
     flex-direction: column;
     align-items: center;
     margin-top: 55px;
-    h2{
-        font-family: 'Archivo', sans-serif; 
-        font-weight: 100;   
-        color: #fff;
-margin-right: 230px;
-margin-bottom: 15px;
+
+
+    .section-title {
+        font-family: $font-family;
+        font-weight: $font-weight-light;
+        color: $text-color;
+        margin-right: 230px;
+        margin-bottom: 15px;
+        align-self: flex-start;
+        margin-left: 40px;
+    }
+
+    .movie-carousel {
+        width: 305px;
+        height: 320px;
+        background-color: $primary-bg-color;
+        border-radius: $border-radius;
+    }
+
+    .carousel-indicators {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 15px;
+        width: 75px;
+        height: 20px;
+        background-color: $primary-bg-color;
+        border-radius: $border-radius;
+
+        &__dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: $secondary-bg-color;
+        }
     }
 }
-.film_container{
 
-    width: 305px;
-    height:320px ;
-    background-color: #382c3e;
-    border-radius: 20px;
+// Movie Sections 
+.movie-section {
+    margin: 40px auto 0;
+    width: 300px;
+    color: $text-color;
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        &__title {
+            font-family: $font-family;
+            font-weight: $font-weight-light;
+        }
+
+        &__action {
+            color: $secondary-text-color;
+            font-family: $font-family;
+            font-weight: $font-weight-light;
+            cursor: pointer;
+        }
+    }
+
+    .movie-grid {
+        display: flex;
+        justify-content: space-between;
+    }
 }
-.paganation{
+
+// Movie Card 
+.movie-card {
+    &__poster {
+        margin-top: 20px;
+        border-radius: $border-radius;
+        width: 140px;
+        height: 160px;
+        background-color: $secondary-bg-color;
+    }
+
+    &__info {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        font-family: $font-family;
+        font-weight: $font-weight-light;
+        margin-top: 15px;
+
+        &__title {
+            grid-column: 1;
+        }
+
+        &__rating {
+            grid-column: 2;
+            text-align: right;
+        }
+
+        &__year {
+            grid-column: 1;
+        }
+    }
+}
+
+// Genre Card
+.genre-card {
+    &__image {
+        margin-top: 20px;
+        border-radius: $border-radius;
+        width: 180px;
+        height: 140px;
+        background-color: $secondary-bg-color;
+    }
+
+    &__name {
+        font-family: $font-family;
+        font-weight: $font-weight-light;
+        margin-top: 15px;
+    }
+}
+
+// Bottom Navigation
+.bottom-navigation {
+    width: 300px;
+    height: 60px;
+    background-color: $secondary-bg-color;
+    margin: 20px auto 0;
+    border-radius: $border-radius;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 15px;
-    width: 75px;
-    height: 20px;
-    background-color: #382c3e;
-    border-radius: 20px;
-    &__point{
-        display: flex;
-        justify-content: space-between;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #998396;
+
+    &__button {
+        width: 24px;
+        height: 24px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        &--home {
+            
+        }
+
+        &--discover {
+           
+        }
+
+        &--movies {
+            
+        }
+
+        &--profile {
+            
+        }
     }
+}
+
+// Responsive Breakpoints
+@media (max-width: 375px) {
+   
+}
+
+@media (max-width: 425px) {
+    
+}
+
+@media (max-width: 768px) {
+   
+}
+
+@media (max-width: 1024px) {
+    
+}
+
+@media (max-width: 1440px) {
+  
+}
+
+@media (max-width: 2560px) {
+    
 }
