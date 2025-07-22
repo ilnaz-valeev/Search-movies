@@ -15,6 +15,9 @@ $border-radius: 20px;
 $font-family: 'Archivo', sans-serif;
 $font-weight-light: 100;
 
+// Responsive Breakpoints
+@media (max-width: 376px) {
+   
 // Main 
 .home-page {
     color: $text-color;
@@ -224,10 +227,9 @@ $font-weight-light: 100;
         }
     }
 }
-
-// Responsive Breakpoints
-@media (max-width: 375px) {
-   
+.icons{
+    width: 30px;
+}
 }
 
 @media (max-width: 425px) {
