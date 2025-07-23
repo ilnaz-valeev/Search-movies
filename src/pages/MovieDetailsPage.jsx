@@ -1,14 +1,17 @@
 // MovieDetailsPage.jsx
 
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import "../css/MovieDeatailsPage.min.css";
 
 const MovieDetailsPage = ({ onSearch }) => {
+  const { id } = useParams(); // Получаем id фильма из URL
+
   return (
     <section className="movie-details-page">
       <section className="movie-details-image">
         <img
-          className="movie-preview"
+          className="movie-preview page"
           src="http://images-s.kinorium.com/movie/poster/2808886/w1500_52518845.jpg"
           alt="Movie Poster"
         />
@@ -40,9 +43,50 @@ const MovieDetailsPage = ({ onSearch }) => {
         </div>
 
         <p className="movie-description">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum,
-          pariatur. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur, adipisicing...
+          Paul, the heir to the famous house of Atreides, travels with his
+          family to one of the most dangerous planets in the universe — Arrakis.
+          There is nothing here but sand, scorching sun, giant monsters and the
+          main cause of intergalactic conflicts — an incredibly valuable
+          resource called melange. .... <span className="more">more</span>
         </p>
+      </section>
+
+      <section className="cast">
+        <h3 className="cast-header">Cast</h3>
+        <div className="cast__img">
+          <div className="cast-img_div">
+            <img
+              className="cast-portret"
+              src="https://avatars.mds.yandex.net/get-entity_search/6276884/1174276750/S88x116Face_2x"
+              alt=""
+            />
+            <span>Timothee Chalamet</span>
+          </div>
+          <div className="cast-img_div">
+            <img
+              className="cast-portret"
+              src="https://avatars.mds.yandex.net/get-entity_search/6276884/1174276750/S88x116Face_2x"
+              alt=""
+            />
+            <span>Timothee Chalamet</span>
+          </div>
+          <div className="cast-img_div">
+            <img
+              className="cast-portret"
+              src="https://avatars.mds.yandex.net/get-entity_search/6276884/1174276750/S88x116Face_2x"
+              alt=""
+            />
+            <span>Timothee Chalamet</span>
+          </div>
+          <div className="cast-img_div">
+            <img
+              className="cast-portret"
+              src="https://avatars.mds.yandex.net/get-entity_search/6276884/1174276750/S88x116Face_2x"
+              alt=""
+            />
+            <span>Timothee Chalamet</span>
+          </div>
+        </div>
       </section>
     </section>
   );

@@ -11,6 +11,7 @@ $primary-bg-color: #382c3e;
 $secondary-bg-color: #998396;
 $text-color: #ffffff;
 $secondary-text-color: #998396;
+$first-text-color: #7c44c2;
 $border-radius: 20px;
 $font-family: 'Archivo', sans-serif;
 $font-weight-light: 100;
@@ -20,6 +21,7 @@ $font-weight-light: 100;
    
 // Main 
 .home-page {
+    margin-bottom: 100px;
     color: $text-color;
 }
 
@@ -89,7 +91,7 @@ $font-weight-light: 100;
 
     .movie-carousel {
         width: 305px;
-        height: 320px;
+        height: 370px;
         background-color: $primary-bg-color;
         border-radius: $border-radius;
     }
@@ -114,7 +116,7 @@ $font-weight-light: 100;
 }
 
 // Movie Sections 
-.movie-section {
+.movie-section {      
     margin: 40px auto 0;
     width: 300px;
     color: $text-color;
@@ -130,7 +132,7 @@ $font-weight-light: 100;
         }
 
         &__action {
-            color: $secondary-text-color;
+            color: $first-text-color;
             font-family: $font-family;
             font-weight: $font-weight-light;
             cursor: pointer;
@@ -145,63 +147,86 @@ $font-weight-light: 100;
 
 // Movie Card 
 .movie-card {
+    margin-right: 10px;
     &__poster {
         margin-top: 20px;
-        border-radius: $border-radius;
-        width: 140px;
-        height: 160px;
-        background-color: $secondary-bg-color;
+
     }
 
     &__info {
-        display: grid;
-        grid-template-columns: 50% 50%;
+
         font-family: $font-family;
         font-weight: $font-weight-light;
         margin-top: 15px;
 
+        .movie-card__info-top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         &__title {
-            grid-column: 1;
+
         }
 
-        &__rating {
-            grid-column: 2;
-            text-align: right;
+        .movie-card__rating {
+            display: flex;
+            align-items: center;
         }
 
-        &__year {
-            grid-column: 1;
-        }
+    .movie-card__year{
+
+    }
     }
 }
+    .rating-icon {
+        
+        .ratings-icon{
+
+            margin-left: 5px;
+            width: 20px;
+        }
+    }
 
 // Genre Card
+.genre-grid{
+    display: flex;
+    gap: 20px;
+}
 .genre-card {
     &__image {
         margin-top: 20px;
         border-radius: $border-radius;
-        width: 180px;
-        height: 140px;
+        width: 240px;
+        height: 180px;
         background-color: $secondary-bg-color;
+        margin-bottom: 15px;
     }
 
-    &__name {
+    .genre-card__name {
+        display: flex;
+        justify-content: start;
         font-family: $font-family;
         font-weight: $font-weight-light;
-        margin-top: 15px;
+
     }
 }
 
 // Bottom Navigation
 .bottom-navigation {
+    position: fixed;
+    bottom: 10px;
+    left: 40px;
     width: 300px;
     height: 60px;
-    background-color: $secondary-bg-color;
+    // background-color: $secondary-bg-color;
+    background-color: rgba(255,255,255,.1);
+    backdrop-filter: blur(3px);
     margin: 20px auto 0;
     border-radius: $border-radius;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    box-shadow: 0 0 1rem rgba(0,0,0,.9);
 
     &__button {
         width: 24px;
@@ -227,10 +252,19 @@ $font-weight-light: 100;
         }
     }
 }
+.movie-preview {
+    width: 100%;
+    width: 150px;
+  height: 260px;
+  border-radius: $border-radius;
+  background-size: cover;
+  background-position: center;
+}
 .icons{
     width: 30px;
 }
 }
+
 
 @media (max-width: 425px) {
     

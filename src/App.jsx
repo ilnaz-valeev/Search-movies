@@ -1,16 +1,18 @@
-// src/App.jsx
 import React from "react";
-import HomePages from "./pages/HomePages"; 
-import MovieDetalisPage from "./pages/MovieDetailsPage"; 
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePages.jsx";
+import MovieDetailsPage from "./pages/MovieDetailsPage";
 
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <HomePages />
-      <MovieDetalisPage />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movie/:id" element={<MovieDetailsPage />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,5 +1,6 @@
 // HomePage.jsx
 import React from 'react';
+import { Link } from "react-router-dom";
 import "../css/HomePages.min.css";
 
 const HomePage = ({ onSearch }) => {
@@ -47,12 +48,28 @@ const HomePage = ({ onSearch }) => {
           <div className="movie-grid">
             {[1, 2].map((item) => (
               <div key={item} className="movie-card">
-                <div className="movie-card__poster"></div>
+                {/* Оборачиваем карточку фильма в Link */}
+                <Link to={`/movie/${item}`} className="movie-card__poster">
+                  <img
+                    className="movie-preview"
+                    src="https://i.pinimg.com/736x/0a/bd/bd/0abdbddd92fbd981457c434096169baa.jpg"
+                    alt="Movie Poster"
+                  />
+                </Link>
                 <div className="movie-card__info">
-                  <span className="movie-card__title">Alien</span>
-                  <span className="movie-card__rating">
-                    8.2 <span className="movie-card__star-icon"></span>
-                  </span>
+                  <div className="movie-card__info-top">
+                    <span className="movie-card__title">Alien</span>
+                    <span className="movie-card__rating">
+                      8.2{" "}
+                      <span className="rating-icon">
+                        <img
+                          className="ratings-icon"
+                          src="https://img.icons8.com/?size=100&id=XBMnwwJYQvfN&format=png&color=000000"
+                          alt=""
+                        />
+                      </span>
+                    </span>
+                  </div>
                   <span className="movie-card__year">2021</span>
                 </div>
               </div>
@@ -68,9 +85,18 @@ const HomePage = ({ onSearch }) => {
           </div>
           <div className="genre-grid">
             <div className="genre-card">
-              <div className="genre-card__image"></div>
+
+              <img
+                className="genre-card__image"
+                src="https://wallpapers.com/images/hd/zombie-hand-in-graveyard-t7o7zaqc2cy9s53b.jpg"
+                alt=""
+              />
               <span className="genre-card__name">Horror</span>
             </div>
+            {/* <div className="genre-card">
+              <div className="genre-card__image"></div>
+              <span className="genre-card__name">Horror</span>
+            </div> */}
           </div>
         </section>
 
@@ -83,12 +109,28 @@ const HomePage = ({ onSearch }) => {
           <div className="movie-grid">
             {[1, 2].map((item) => (
               <div key={item} className="movie-card">
-                <div className="movie-card__poster"></div>
+                {/* Оборачиваем карточку фильма в Link */}
+                <Link to={`/movie/${item}`} className="movie-card__poster">
+                  <img
+                    className="movie-preview"
+                    src="https://i.pinimg.com/736x/0a/bd/bd/0abdbddd92fbd981457c434096169baa.jpg"
+                    alt="Movie Poster"
+                  />
+                </Link>
                 <div className="movie-card__info">
-                  <span className="movie-card__title">Alien</span>
-                  <span className="movie-card__rating">
-                    8.2 <span className="movie-card__star-icon"></span>
-                  </span>
+                  <div className="movie-card__info-top">
+                    <span className="movie-card__title">Alien</span>
+                    <span className="movie-card__rating">
+                      8.2
+                      <span className="rating-icon">
+                        <img
+                          className="ratings-icon"
+                          src="https://img.icons8.com/?size=100&id=XBMnwwJYQvfN&format=png&color=000000"
+                          alt=""
+                        />
+                      </span>
+                    </span>
+                  </div>
                   <span className="movie-card__year">2021</span>
                 </div>
               </div>
@@ -101,28 +143,28 @@ const HomePage = ({ onSearch }) => {
           <button className="bottom-navigation__button bottom-navigation__button--home">
             <img
               className="icons"
-              src="https://img.icons8.com/?size=100&id=Eyy3nmHIbCL8&format=png&color=000000"
+              src="https://img.icons8.com/?size=100&id=Eyy3nmHIbCL8&format=png&color=FFFFFF"
               alt=""
             />
           </button>
           <button className="bottom-navigation__button bottom-navigation__button--discover">
             <img
               className="icons"
-              src="https://img.icons8.com/?size=100&id=Dgdweob5lIAF&format=png&color=000000"
+              src="https://img.icons8.com/?size=100&id=Dgdweob5lIAF&format=png&color=FFFFFF"
               alt=""
             />
           </button>
           <button className="bottom-navigation__button bottom-navigation__button--movies">
             <img
               className="icons"
-              src="https://img.icons8.com/?size=100&id=nGmPWUD7vDMN&format=png&color=000000"
+              src="https://img.icons8.com/?size=100&id=nGmPWUD7vDMN&format=png&color=FFFFFF"
               alt=""
             />
           </button>
           <button className="bottom-navigation__button bottom-navigation__button--profile">
             <img
               className="icons"
-              src="https://img.icons8.com/?size=100&id=fJ7hcfUGpKG7&format=png&color=000000"
+              src="https://img.icons8.com/?size=100&id=j1b8nUSGHfe0&format=png&color=FFFFFF"
               alt=""
             />
           </button>
