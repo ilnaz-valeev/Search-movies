@@ -1,15 +1,16 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 $primary-bg-color: #382c3e;
 $secondary-bg-color: #998396;
 $text-color: #ffffff;
 $secondary-text-color: #998396;
+$first-text-color: #6655cc;
 $border-radius: 20px;
-$font-family: 'Archivo', sans-serif;
+$font-family: "Archivo", sans-serif;
 $font-weight-light: 100;
 
 $font-size-base: 16px; // базовый размер шрифта
@@ -19,111 +20,235 @@ $font-size-large: 24px;
 $font-size-xlarge: 32px;
 
 .movie-details-page {
-    font-family: $font-family;
-    color: $text-color;
+  font-family: $font-family;
+  color: $text-color;
 }
 
 .movie-details-image {
 }
 
 .movie-preview.page {
-
-width: 100%;
-
+  width: 100%;
+  height: 260px;
+  border-radius: 0px;
 }
 
-
 .movie-info {
-    margin: 0 20px;
-    font-size: $font-size-base;
+  margin: 0 20px;
+  font-size: $font-size-base;
 }
 
 .movie-title-rating {
+  display: flex;
+  justify-content: space-between;
+
+  .movie-title {
+    font-family: $font-family;
+    color: $text-color;
+    font-size: $font-size-xlarge; // Большой размер для названия фильма
+    font-weight: bold;
+  }
+
+  .rating-icon {
+    .ratings-icon {
+      margin-left: 5px;
+      width: 20px;
+    }
+  }
+
+  .movie-rating {
     display: flex;
-    justify-content: space-between;
-
-
-    .movie-title {
-        
-        font-family: $font-family;
-        color: $text-color;
-        font-size: $font-size-xlarge; // Большой размер для названия фильма
-        font-weight: bold;
-    }
-
-    .rating-icon {
-        
-        .ratings-icon{
-            margin-left: 5px;
-            width: 20px;
-        }
-    }
-
-    .movie-rating {
-        display: flex;
-        align-items: center;
-        font-family: $font-family;
-        color: $text-color;
-        font-size: $font-size-medium; // Средний размер для рейтинга
-    }
+    align-items: center;
+    font-family: $font-family;
+    color: $text-color;
+    font-size: $font-size-medium; // Средний размер для рейтинга
+  }
 }
 
 .movie-details {
-    font-family: $font-family;
-    color: $secondary-text-color;
-    margin-top: 10px;
-    font-size: $font-size-small; // Меньший размер для года и режиссера
+  font-family: $font-family;
+  color: $secondary-text-color;
+  margin-top: 10px;
+  font-size: $font-size-small; // Меньший размер для года и режиссера
 
-    .release-year,
-    .director {
-      
-    }
+  .release-year,
+  .director {
+  }
 }
 
 .movie-genres {
-    font-family: $font-family;
-    margin-top: 20px;
-    font-size: $font-size-small; // Размер шрифта для жанров
+  font-family: $font-family;
+  margin-top: 20px;
+  font-size: $font-size-small; // Размер шрифта для жанров
 
-    .genre {
-        color: $secondary-text-color;
-        background-color: $primary-bg-color;
-        border-radius: $border-radius;
-        padding: 5px 20px;
-        margin-right: 10px;
-    }
+  .genre {
+    color: $secondary-text-color;
+    background-color: $primary-bg-color;
+    border-radius: $border-radius;
+    padding: 5px 20px;
+    margin-right: 10px;
+  }
 }
 
 .movie-description {
-    font-family: $font-family;
-    color: $text-color;
-    margin-top: 20px;
-    font-size: $font-size-small; // Средний размер для описания
-    .more{
-        color: $secondary-text-color;
-        cursor: pointer;
-    }
+  font-family: $font-family;
+  color: $text-color;
+  margin-top: 20px;
+  font-size: $font-size-small; // Средний размер для описания
+  .more {
+    color: $secondary-text-color;
+    cursor: pointer;
+  }
 }
 
+.cast {
+  margin: 20px 20px 0 20px;
+  font-size: $font-size-base;
+  .cast-header {
+  }
+  .cast__img {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    .cast-img_div {
+      width: 80px;
+    }
+    .cast-portret {
+      border-radius: $border-radius;
+      width: 75px;
+      height: 100px;
+    }
+  }
+}
+.trailer {
+  margin: 20px 20px 0 20px;
 
-.cast{
-    margin: 20px 20px 0 20px;
+  &__title {
+    font-size: $font-size-medium;
+    font-family: $font-family;
+  }
+
+  &__video {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 330px;
+    height: 180px;
+    background-color: $secondary-bg-color;
+    border-radius: $border-radius;
+  }
+}
+
+.comments {
+  margin: 20px 20px 110px 20px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__header-title {
+    font-weight: bold;
+    font-size: $font-size-medium;
+  }
+
+  &__header-see-all {
     font-size: $font-size-base;
-    .cast-header{
+    cursor: pointer;
+    color: $first-text-color;
+  }
 
-    }
-    .cast__img{
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-        .cast-img_div{
-            width: 80px;
-            
+  &__user {
+
+    background-color: $primary-bg-color;
+    border-radius: $border-radius;
+    height: 150px;
+    width: 270px;
+    padding: 10px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Добавил flex для вертикального расположения */
+    align-items: flex-start; /* Выравнивание элементов по левому краю */
+
+    .user__profile {
+      display: flex;
+
+      margin-bottom: 10px;
+      width: 100%;
+
+      .user__profile-img {
+        margin-right: 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .user__profile-info {
+        margin-right: 35px;
+
+        .user__profile-name {
+          font-size: $font-size-base;
         }
-        .cast-portret{
-            border-radius: $border-radius;
-            width: 75px;
-            height: 100px;
-        }   
+
+        .user__profile-date {
+          font-size: $font-size-small;
+          color: $secondary-text-color;
+        }
+      }
+
+      .user__rating {
+        display: flex;
+
+        align-items: start;
+
+        .user__rating-number {
+          font-weight: bold;
+          margin-right: 5px;
+          margin-top: 3px;
+        }
+
+        .user__rating-icon {
+          width: 20px;
+        }
+      }
     }
+
+    .user__feedback {
+      font-size: $font-size-small;
+    }
+  }
+}
+
+.watch-now {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  left: 23px;
+  bottom: 10px;
+  border: none;
+  background-color: $first-text-color;
+  color: $text-color;
+  width: 330px;
+  margin: 0 auto;
+  font-family: $font-family;
+  padding: 20px 0;
+  border-radius: $border-radius;
+  font-size: 20px;
+}
+.close-film {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: none;
+  .close-film__img {
+    width: 25px;
+    height: 25px;
+  }
 }

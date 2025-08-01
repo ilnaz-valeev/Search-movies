@@ -88,6 +88,54 @@ const MovieDetailsPage = ({ onSearch }) => {
           </div>
         </div>
       </section>
+
+      <section className="trailer">
+        <h3 className="trailer__title">Trailer</h3>
+        <span className="trailer__video"></span>
+      </section>
+
+      <section className="comments">
+        <div className="comments__header">
+          <h3 className="comments__header-title">Comments</h3>
+          <span className="comments__header-see-all">See all</span>
+        </div>
+        <div className="comments__user">
+          <div className="user__profile">
+            <img
+              className="user__profile-img"
+              src="https://live.staticflickr.com/65535/52879735901_205eff2209_h.jpg"
+              alt="Profile"
+            />
+            <div className="user__profile-info">
+              <span className="user__profile-name">Theresa Webb</span>
+              <br />
+              <span className="user__profile-date">June 28, 2021</span>
+            </div>
+            <div className="user__rating">
+              <span className="user__rating-number">4.0</span>
+              <img
+                className="user__rating-icon"
+                src="https://img.icons8.com/?size=100&id=XBMnwwJYQvfN&format=png&color=000000"
+                alt="Rating Star"
+              />
+            </div>
+          </div>
+          <div className="user__feedback">
+            Great movie! I will review it more than oncel Special thanks to the
+            operation! review it more than oncel Special thanks to the
+            operation!
+          </div>
+        </div>
+      </section>
+      <button className="watch-now">Watch now</button>
+
+      <button className="close-film">
+        <img
+          className="close-film__img"
+          src="https://img.icons8.com/?size=100&id=16248&format=png&color=000000"
+          alt="#"
+        />
+      </button>
     </section>
   );
 };

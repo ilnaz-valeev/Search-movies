@@ -11,7 +11,7 @@ $primary-bg-color: #382c3e;
 $secondary-bg-color: #998396;
 $text-color: #ffffff;
 $secondary-text-color: #998396;
-$first-text-color: #7c44c2;
+$first-text-color: #6655CC;
 $border-radius: 20px;
 $font-family: 'Archivo', sans-serif;
 $font-weight-light: 100;
@@ -91,7 +91,7 @@ $font-weight-light: 100;
 
     .movie-carousel {
         width: 305px;
-        height: 370px;
+        height: 330px;
         background-color: $primary-bg-color;
         border-radius: $border-radius;
     }
@@ -255,7 +255,7 @@ $font-weight-light: 100;
 .movie-preview {
     width: 100%;
     width: 150px;
-  height: 260px;
+  height: 220px;
   border-radius: $border-radius;
   background-size: cover;
   background-position: center;
@@ -271,7 +271,7 @@ $font-weight-light: 100;
 }
 
 @media (max-width: 768px) {
-   
+
 }
 
 @media (max-width: 1024px) {
