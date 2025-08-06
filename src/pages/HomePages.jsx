@@ -1,9 +1,37 @@
 // HomePage.jsx
-import React from 'react';
+import React,{ useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 import "../css/HomePages.min.css";
 
-const HomePage = ({ onSearch }) => {
+const HomePage = () => {
+    const [movies, setMovies] = useState([]);
+    const [error, setError] = useState(null);
+
+    // Функция для получения списка популярных фильмов
+    // Используем useEffect для загрузки данных при монтировании компонента
+    useEffect(() => {
+        const fetchMovies = async () => {
+            try {
+                const response = await fetch(
+                  "https://api.themoviedb.org/3/movie/popular?api_key=d3a30a9f1d20c66bdfb69e9305fdd5e0&language=en-US&page=1"
+                );
+                if (!response.ok){
+                    throw new Error('Error fetching movies')
+                }
+                const data = await response.json();
+                setMovies(data.results)
+            }catch (error){
+                setError(error.message);
+            }
+        };
+        fetchMovies();
+    }, []);
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
+
     return (
       <main className="home-page">
         {/* Header Section */}

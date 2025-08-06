@@ -1,11 +1,16 @@
-// MovieDetailsPage.jsx
-
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "../css/MovieDeatailsPage.min.css";
 
 const MovieDetailsPage = ({ onSearch }) => {
   const { id } = useParams(); // Получаем id фильма из URL
+  const navigate = useNavigate(); // Используем useNavigate для навигации
+
+  // Функция для возврата на домашнюю страницу
+  const handleClose = () => {
+    navigate(-1); // Возвращаемся на предыдущую страницу (например, на главную)
+    // или можно использовать navigate('/') для перехода на главную страницу
+  };
 
   return (
     <section className="movie-details-page">
@@ -121,15 +126,16 @@ const MovieDetailsPage = ({ onSearch }) => {
             </div>
           </div>
           <div className="user__feedback">
-            Great movie! I will review it more than oncel Special thanks to the
-            operation! review it more than oncel Special thanks to the
+            Great movie! I will review it more than once. Special thanks to the
             operation!
           </div>
         </div>
       </section>
+
       <button className="watch-now">Watch now</button>
 
-      <button className="close-film">
+      {/* Кнопка для возврата назад */}
+      <button className="close-film" onClick={handleClose}>
         <img
           className="close-film__img"
           src="https://img.icons8.com/?size=100&id=16248&format=png&color=000000"
