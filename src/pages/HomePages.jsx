@@ -15,23 +15,22 @@ const HomePage = () => {
   // Мы используем fetch для получения данных с сервера
   // После получения данных мы обновляем состояние movies
   // Если произошла ошибка, мы сохраняем сообщение об ошибке в состоянии error
+  // HomePage.jsx
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await fetch(`/api/movies`);
+        const base = import.meta.env.DEV
+          ? "https://kinotap.vercel.app" // используем прод-функцию, когда работаем локально
+          : ""; // на проде достаточно относительного пути
 
+        const res = await fetch(`${base}/api/movies`);
         const data = await res.json();
-
-        if (data.error) {
-          throw new Error(data.error);
-        }
-
-        setMovies(data.results);
+        if (data.error) throw new Error(data.error);
+        setMovies(data.results || []);
       } catch (err) {
         setError(err.message);
       }
     };
-
     fetchMovies();
   }, []);
 
@@ -79,11 +78,14 @@ const HomePage = () => {
         <div className="movie-grid">
           {movies.map((movie) => (
             <div key={movie.id} className="movie-card">
-              {/* Оборачиваем карточку фильма в Link */}
               <Link to={`/movie/${movie.id}`} className="movie-card__poster">
                 <img
                   className="movie-preview"
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  src={
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                      : "/fallback-poster.png"
+                  }
                   alt={movie.title}
                 />
               </Link>
