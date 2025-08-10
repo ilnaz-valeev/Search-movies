@@ -1,6 +1,7 @@
 // HomePage.jsx
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Slider from "react-slick"; // Импортируем слайдер
 import "../css/HomePages.min.css";
 
 const HomePage = () => {
@@ -16,23 +17,43 @@ const HomePage = () => {
   // После получения данных мы обновляем состояние movies
   // Если произошла ошибка, мы сохраняем сообщение об ошибке в состоянии error
   // HomePage.jsx
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const base = import.meta.env.DEV
-          ? "https://kinotap.vercel.app" // используем прод-функцию, когда работаем локально
-          : ""; // на проде достаточно относительного пути
+ useEffect(() => {
+   const fetchMovies = async () => {
+     try {
+       const base = import.meta.env.DEV ? "https://kinotap.vercel.app" : "";
 
-        const res = await fetch(`${base}/api/movies`);
-        const data = await res.json();
-        if (data.error) throw new Error(data.error);
-        setMovies(data.results || []);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-    fetchMovies();
-  }, []);
+       const res = await fetch(`${base}/api/movies`);
+       const data = await res.json();
+       if (data.error) throw new Error(data.error);
+       setMovies(data.results || []);
+     } catch (err) {
+       setError(err.message);
+     }
+   };
+   fetchMovies();
+ }, []);
+
+ const settings = {
+   dots: true, // Показываем навигационные точки
+   infinite: true, // Бесконечный цикл слайдов
+   speed: 500, // Скорость перехода между слайдами
+   slidesToShow: 3, // Число слайдов, которые показываются одновременно
+   slidesToScroll: 1, // Количество слайдов для прокрутки за один раз
+   responsive: [
+     {
+       breakpoint: 1024, // Для экранов меньше 1024px
+       settings: {
+         slidesToShow: 2,
+       },
+     },
+     {
+       breakpoint: 768, // Для экранов меньше 768px
+       settings: {
+         slidesToShow: 1,
+       },
+     },
+   ],
+ };
 
   return (
     <main className="home-page">
@@ -75,40 +96,46 @@ const HomePage = () => {
           <h3 className="section-header__title">Popular</h3>
           <span className="section-header__action">See all</span>
         </div>
-        <div className="movie-grid">
-          {movies.map((movie) => (
-            <div key={movie.id} className="movie-card">
-              <Link to={`/movie/${movie.id}`} className="movie-card__poster">
-                <img
-                  className="movie-preview"
-                  src={
-                    movie.poster_path
-                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                      : "/fallback-poster.png"
-                  }
-                  alt={movie.title}
-                />
-              </Link>
-              <div className="movie-card__info">
-                <div className="movie-card__info-top">
-                  <span className="movie-card__title">{movie.title}</span>
-                  <span className="movie-card__rating">
-                    {movie.vote_average}
-                    <span className="rating-icon">
-                      <img
-                        className="ratings-icon"
-                        src="https://img.icons8.com/?size=100&id=XBMnwwJYQvfN&format=png&color=000000"
-                        alt="rating"
-                      />
+
+        {/* Карусель для популярных фильмов */}
+        <div className="movie-carousel">
+          <Slider {...settings}>
+            {movies.map((movie) => (
+              <div key={movie.id} className="movie-card">
+                <Link to={`/movie/${movie.id}`} className="movie-card__poster">
+                  <img
+                    className="movie-preview"
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        : "/fallback-poster.png"
+                    }
+                    alt={movie.title}
+                  />
+                </Link>
+                <div className="movie-card__info">
+                  <div className="movie-card__info-top">
+                    <span className="movie-card__title">{movie.title}</span>
+                    <span className="movie-card__rating">
+                      {movie.vote_average}
+                      <span className="rating-icon">
+                        <img
+                          className="ratings-icon"
+                          src="https://img.icons8.com/?size=100&id=XBMnwwJYQvfN&format=png&color=000000"
+                          alt="rating"
+                        />
+                      </span>
                     </span>
+                  </div>
+                  <span className="movie-card__year">
+                    {movie.release_date?.split("-")[0]}
                   </span>
                 </div>
-                <span className="movie-card__year">
-                  {movie.release_date?.split("-")[0]}
-                </span>
               </div>
-            </div>
-          ))}
+              
+              
+            ))}
+          </Slider>
         </div>
       </section>
 
@@ -141,7 +168,7 @@ const HomePage = () => {
           <span className="section-header__action">See all</span>
         </div>
         <div className="movie-grid">
-          {[1, 2].map((item) => (
+          {[1, 2,3,4].map((item) => (
             <div key={item} className="movie-card">
               {/* Оборачиваем карточку фильма в Link */}
               <Link to={`/movie/${item}`} className="movie-card__poster">

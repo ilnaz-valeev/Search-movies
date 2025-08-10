@@ -285,3 +285,28 @@ $font-weight-light: 100;
 @media (max-width: 2560px) {
     
 }
+
+.movie-carousel {
+  .movie-card {
+    width: 200px; 
+    margin: 10px;
+    .movie-preview {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .movie-card__info {
+      .movie-card__title {
+        font-size: 16px;
+        margin: 5px 0;
+      }
+      .movie-card__rating {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+      }
+      .movie-card__year {
+        font-size: 12px;
+      }
+    }
+  }
+}
