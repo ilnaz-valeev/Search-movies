@@ -17,42 +17,49 @@ const HomePage = () => {
   // После получения данных мы обновляем состояние movies
   // Если произошла ошибка, мы сохраняем сообщение об ошибке в состоянии error
   // HomePage.jsx
- useEffect(() => {
-   const fetchMovies = async () => {
-     try {
-       const base = import.meta.env.DEV ? "https://kinotap.vercel.app" : "";
+useEffect(() => {
+  const fetchMovies = async () => {
+    try {
+      // Если это разработка, используем локальный сервер
+      const base = import.meta.env.DEV
+        ? "http://localhost:3000"
+        : "https://kinotap.vercel.app"; // Пустая строка при разработке
 
-       const res = await fetch(`${base}/api/movies`);
-       const data = await res.json();
-       if (data.error) throw new Error(data.error);
-       setMovies(data.results || []);
-     } catch (err) {
-       setError(err.message);
-     }
-   };
-   fetchMovies();
- }, []);
+      // Запрос к API
+      const res = await fetch(`${base}/api/movies`);
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      setMovies(data.results || []);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+  fetchMovies();
+}, []);
+
+
+
 
  const settings = {
    dots: true, // Показываем навигационные точки
    infinite: true, // Бесконечный цикл слайдов
    speed: 500, // Скорость перехода между слайдами
-   slidesToShow: 3, // Число слайдов, которые показываются одновременно
+   slidesToShow: 2, // Число слайдов, которые показываются одновременно
    slidesToScroll: 1, // Количество слайдов для прокрутки за один раз
-   responsive: [
-     {
-       breakpoint: 1024, // Для экранов меньше 1024px
-       settings: {
-         slidesToShow: 2,
-       },
-     },
-     {
-       breakpoint: 768, // Для экранов меньше 768px
-       settings: {
-         slidesToShow: 1,
-       },
-     },
-   ],
+//    responsive: [
+//      {
+//        breakpoint: 1024, // Для экранов меньше 1024px
+//        settings: {
+//          slidesToShow: 2,
+//        },
+//      },
+//      {
+//        breakpoint: 768, // Для экранов меньше 768px
+//        settings: {
+//          slidesToShow: 1,
+//        },
+//      },
+//    ],
  };
 
   return (
