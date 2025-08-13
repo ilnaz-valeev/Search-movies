@@ -20,10 +20,7 @@ const HomePage = () => {
 useEffect(() => {
   const fetchMovies = async () => {
     try {
-      // Если это разработка, используем локальный сервер
-      const base = import.meta.env.DEV
-        ? "http://localhost:3000"
-        : "https://kinotap.vercel.app"; // Пустая строка при разработке
+      const base = "https://kinotap.vercel.app"; // Используем продакшн URL
 
       // Запрос к API
       const res = await fetch(`${base}/api/movies`);
