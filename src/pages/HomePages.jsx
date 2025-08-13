@@ -172,7 +172,7 @@ useEffect(() => {
           <span className="section-header__action">See all</span>
         </div>
         <div className="movie-grid">
-          {[1, 2,3,4].map((item) => (
+          {[1, 2].map((item) => (
             <div key={item} className="movie-card">
               {/* Оборачиваем карточку фильма в Link */}
               <Link to={`/movie/${item}`} className="movie-card__poster">
