@@ -114,7 +114,9 @@ $font-weight-light: 100;
         }
     }
 }
+.movie-carousel{
 
+}
 // Movie Sections 
 .movie-section {      
     margin: 40px auto 0;
@@ -147,7 +149,7 @@ $font-weight-light: 100;
 
 // Movie Card 
 .movie-card {
-    margin-right: 10px;
+    
     &__poster {
         margin-top: 20px;
 
@@ -162,7 +164,7 @@ $font-weight-light: 100;
         .movie-card__info-top{
             display: flex;
             justify-content: space-between;
-            align-items: center;
+
         }
         &__title {
 
@@ -170,7 +172,7 @@ $font-weight-light: 100;
 
         .movie-card__rating {
             display: flex;
-            align-items: center;
+
         }
 
     .movie-card__year{
@@ -285,6 +287,7 @@ $font-weight-light: 100;
 @media (max-width: 2560px) {
     
 }
+
 
 // .movie-carousel {
 //   .movie-card {

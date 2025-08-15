@@ -8,56 +8,48 @@ const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
 
-  // Функция для получения списка популярных фильмов
+  // Функция для получения популярных фильмов
   // Используем useEffect для загрузки данных при монтировании компонента
-  // Здесь мы делаем запрос к нашему API
-  // который мы создали в файле my-movies-app/pages/api/movies.js (Next js)
-  // Этот API возвращает список популярных фильмов
-  // Мы используем fetch для получения данных с сервера
-  // После получения данных мы обновляем состояние movies
-  // Если произошла ошибка, мы сохраняем сообщение об ошибке в состоянии error
+
   // HomePage.jsx
-useEffect(() => {
-  const fetchMovies = async () => {
-    try {
-      const base = "https://kinotap.vercel.app"; // Используем продакшн URL
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const base = "https://kinotap.vercel.app"; // Используем продакшн URL
 
-      // Запрос к API
-      const res = await fetch(`${base}/api/movies`);
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      setMovies(data.results || []);
-    } catch (err) {
-      setError(err.message);
-    }
+        // Запрос к API
+        const res = await fetch(`${base}/api/movies`);
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        setMovies(data.results || []);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchMovies();
+  }, []);
+
+  const settings = {
+    //    dots: true, // Показываем навигационные точки
+    infinite: true, // Бесконечный цикл слайдов
+    speed: 500, // Скорость перехода между слайдами
+    slidesToShow: 2, // Число слайдов, которые показываются одновременно
+    slidesToScroll: 1, // Количество слайдов для прокрутки за один раз
+    //    responsive: [
+    //      {
+    //        breakpoint: 1024, // Для экранов меньше 1024px
+    //        settings: {
+    //          slidesToShow: 2,
+    //        },
+    //      },
+    //      {
+    //        breakpoint: 768, // Для экранов меньше 768px
+    //        settings: {
+    //          slidesToShow: 1,
+    //        },
+    //      },
+    //    ],
   };
-  fetchMovies();
-}, []);
-
-
-
-
- const settings = {
-   dots: true, // Показываем навигационные точки
-   infinite: true, // Бесконечный цикл слайдов
-   speed: 500, // Скорость перехода между слайдами
-   slidesToShow: 2, // Число слайдов, которые показываются одновременно
-   slidesToScroll: 1, // Количество слайдов для прокрутки за один раз
-//    responsive: [
-//      {
-//        breakpoint: 1024, // Для экранов меньше 1024px
-//        settings: {
-//          slidesToShow: 2,
-//        },
-//      },
-//      {
-//        breakpoint: 768, // Для экранов меньше 768px
-//        settings: {
-//          slidesToShow: 1,
-//        },
-//      },
-//    ],
- };
 
   return (
     <main className="home-page">
@@ -121,7 +113,7 @@ useEffect(() => {
                   <div className="movie-card__info-top">
                     <span className="movie-card__title">{movie.title}</span>
                     <span className="movie-card__rating">
-                      {movie.vote_average}
+                      {movie.vote_average.toFixed(1)}
                       <span className="rating-icon">
                         <img
                           className="ratings-icon"
@@ -136,8 +128,6 @@ useEffect(() => {
                   </span>
                 </div>
               </div>
-              
-              
             ))}
           </Slider>
         </div>
