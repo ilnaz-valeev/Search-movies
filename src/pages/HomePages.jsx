@@ -1,4 +1,3 @@
-// HomePage.jsx
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick"; // Импортируем слайдер
@@ -6,27 +5,79 @@ import "../css/HomePages.min.css";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
+  const [topRatedMovies, setTopRatedMovies] = useState([]); // Стейт для топовых
   const [error, setError] = useState(null);
 
   // Функция для получения популярных фильмов
   // Используем useEffect для загрузки данных при монтировании компонента
 
   // HomePage.jsx
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const base = "https://kinotap.vercel.app"; // Используем продакшн URL
+  const fetchMovies = async (page = 1) => {
+    try {
+      const base = "https://kinotap.vercel.app";
+      const res = await fetch(
+        `${base}/api/movies?sort_by=popularity.desc&page=${page}`
+      );
 
-        // Запрос к API
-        const res = await fetch(`${base}/api/movies`);
-        const data = await res.json();
-        if (data.error) throw new Error(data.error);
-        setMovies(data.results || []);
-      } catch (err) {
-        setError(err.message);
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
       }
-    };
-    fetchMovies();
+
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      setMovies((prevMovies) => [...prevMovies, ...data.results]); // Добавляем новые фильмы к существующим
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  // Запрос для получения топовых фильмов
+  const fetchTopRatedMovies = async () => {
+    try {
+      const base = "https://kinotap.vercel.app";
+      const res = await fetch(`${base}/api/movies?sort_by=vote_average.desc`);
+
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      // Фильтруем фильмы с высоким рейтингом
+      const topRated = data.results.filter((movie) => movie.vote_average >= 7); // Пример фильтрации
+      setTopRatedMovies(topRated || []);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const fetchMoviesByGenre = async (genreId) => {
+    try {
+      const base = "https://kinotap.vercel.app";
+      const res = await fetch(
+        `${base}/api/movies?with_genres=${genreId}&sort_by=popularity.desc`
+      );
+
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      setMovies(data.results || []);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchMovies(1); // Получаем первую страницу фильмов
+    fetchMovies(2); // Получаем вторую страницу фильмов
+    fetchTopRatedMovies(); // Получаем топовые фильмы
+    fetchMoviesByGenre(28);
   }, []);
 
   const settings = {
@@ -35,20 +86,6 @@ const HomePage = () => {
     speed: 500, // Скорость перехода между слайдами
     slidesToShow: 2, // Число слайдов, которые показываются одновременно
     slidesToScroll: 1, // Количество слайдов для прокрутки за один раз
-    //    responsive: [
-    //      {
-    //        breakpoint: 1024, // Для экранов меньше 1024px
-    //        settings: {
-    //          slidesToShow: 2,
-    //        },
-    //      },
-    //      {
-    //        breakpoint: 768, // Для экранов меньше 768px
-    //        settings: {
-    //          slidesToShow: 1,
-    //        },
-    //      },
-    //    ],
   };
 
   return (
@@ -96,39 +133,46 @@ const HomePage = () => {
         {/* Карусель для популярных фильмов */}
         <div className="movie-carousel">
           <Slider {...settings}>
-            {movies.map((movie) => (
-              <div key={movie.id} className="movie-card">
-                <Link to={`/movie/${movie.id}`} className="movie-card__poster">
-                  <img
-                    className="movie-preview"
-                    src={
-                      movie.poster_path
-                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                        : "/fallback-poster.png"
-                    }
-                    alt={movie.title}
-                  />
-                </Link>
-                <div className="movie-card__info">
-                  <div className="movie-card__info-top">
-                    <span className="movie-card__title">{movie.title}</span>
-                    <span className="movie-card__rating">
-                      {movie.vote_average.toFixed(1)}
-                      <span className="rating-icon">
-                        <img
-                          className="ratings-icon"
-                          src="https://img.icons8.com/?size=100&id=XBMnwwJYQvfN&format=png&color=000000"
-                          alt="rating"
-                        />
+            {movies.length > 0 ? (
+              movies.map((movie) => (
+                <div key={movie.id} className="movie-card">
+                  <Link
+                    to={`/movie/${movie.id}`}
+                    className="movie-card__poster"
+                  >
+                    <img
+                      className="movie-preview"
+                      src={
+                        movie.poster_path
+                          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                          : "/fallback-poster.png"
+                      }
+                      alt={movie.title}
+                    />
+                  </Link>
+                  <div className="movie-card__info">
+                    <div className="movie-card__info-top">
+                      <span className="movie-card__title">{movie.title}</span>
+                      <span className="movie-card__rating">
+                        {movie.vote_average.toFixed(1)}
+                        <span className="rating-icon">
+                          <img
+                            className="ratings-icon"
+                            src="https://img.icons8.com/?size=100&id=XBMnwwJYQvfN&format=png&color=000000"
+                            alt="rating"
+                          />
+                        </span>
                       </span>
+                    </div>
+                    <span className="movie-card__year">
+                      {movie.release_date?.split("-")[0]}
                     </span>
                   </div>
-                  <span className="movie-card__year">
-                    {movie.release_date?.split("-")[0]}
-                  </span>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
           </Slider>
         </div>
       </section>
@@ -148,48 +192,58 @@ const HomePage = () => {
             />
             <span className="genre-card__name">Horror</span>
           </div>
-          {/* <div className="genre-card">
-              <div className="genre-card__image"></div>
-              <span className="genre-card__name">Horror</span>
-            </div> */}
         </div>
       </section>
 
       {/* Legendary Movies Section */}
       <section className="movie-section">
         <div className="section-header">
-          <h3 className="section-header__title">Legendary movies</h3>
+          <h3 className="section-header__title">Top Rated Movies</h3>
           <span className="section-header__action">See all</span>
         </div>
-        <div className="movie-grid">
-          {[1, 2].map((item) => (
-            <div key={item} className="movie-card">
-              {/* Оборачиваем карточку фильма в Link */}
-              <Link to={`/movie/${item}`} className="movie-card__poster">
-                <img
-                  className="movie-preview"
-                  src="https://i.pinimg.com/736x/0a/bd/bd/0abdbddd92fbd981457c434096169baa.jpg"
-                  alt="Movie Poster"
-                />
-              </Link>
-              <div className="movie-card__info">
-                <div className="movie-card__info-top">
-                  <span className="movie-card__title">Alien</span>
-                  <span className="movie-card__rating">
-                    8.2
-                    <span className="rating-icon">
-                      <img
-                        className="ratings-icon"
-                        src="https://img.icons8.com/?size=100&id=XBMnwwJYQvfN&format=png&color=000000"
-                        alt=""
-                      />
+        <div className="movie-carousel">
+          <Slider {...settings}>
+            {topRatedMovies.length > 0 ? (
+              topRatedMovies.map((movie) => (
+                <div key={movie.id} className="movie-card">
+                  <Link
+                    to={`/movie/${movie.id}`}
+                    className="movie-card__poster"
+                  >
+                    <img
+                      className="movie-preview"
+                      src={
+                        movie.poster_path
+                          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                          : "/fallback-poster.png"
+                      }
+                      alt={movie.title}
+                    />
+                  </Link>
+                  <div className="movie-card__info">
+                    <div className="movie-card__info-top">
+                      <span className="movie-card__title">{movie.title}</span>
+                      <span className="movie-card__rating">
+                        {movie.vote_average.toFixed(1)}
+                        <span className="rating-icon">
+                          <img
+                            className="ratings-icon"
+                            src="https://img.icons8.com/?size=100&id=XBMnwwJYQvfN&format=png&color=000000"
+                            alt="rating"
+                          />
+                        </span>
+                      </span>
+                    </div>
+                    <span className="movie-card__year">
+                      {movie.release_date?.split("-")[0]}
                     </span>
-                  </span>
+                  </div>
                 </div>
-                <span className="movie-card__year">2021</span>
-              </div>
-            </div>
-          ))}
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
+          </Slider>
         </div>
       </section>
 
